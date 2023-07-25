@@ -1,0 +1,18 @@
+{
+  "name": "react-extension",
+  "version": "1.0.0",
+  "description": "Build react extension with react",
+  "main": "index.js",
+  "author": "kelche",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack --watch --progress --config webpack.config.js"
+  },
+  "devDependencies": {
+    "react": "^18.2.0",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}
