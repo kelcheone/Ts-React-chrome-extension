@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDom from "react-dom/client";
-import "./popup.css";
+import "./options.css";
 
-const test = <p>Hello world</p>;
+const test = <img src="icon.png" />;
 // create root and append to body
 const root = document.createElement("div");
 document.body.appendChild(root);

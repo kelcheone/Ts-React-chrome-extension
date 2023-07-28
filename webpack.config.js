@@ -7,6 +7,12 @@ module.exports = {
   devtool: "cheap-module-source-map",
   entry: {
     popup: path.resolve(__dirname, "src/popup/popup.tsx"),
+    options: path.resolve(__dirname, "src/options/options.tsx"),
+    background: path.resolve(__dirname, "src/background/background.ts"),
+    contentScript: path.resolve(
+      __dirname,
+      "src/contentScript/contentScript.ts"
+    ),
   },
   module: {
     rules: [
@@ -15,22 +21,27 @@ module.exports = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
       },
+      {
+        use: ["style-loader", "css-loader"],
+        test: /\.css$/i,
+      },
+      {
+        type: "asset/resource",
+        test: /\.(png|svg|jpg|jpeg|gif|woff|woff2|eot|ttf)$/i,
+      },
     ],
   },
   plugins: [
     new copyPlugin({
       patterns: [
         {
-          from: "src/manifest.json",
+          from: "src/static",
           to: path.resolve(__dirname, "dist"),
         },
       ],
     }),
-    new HtmlWebpackPlugin({
-      title: "React Extension",
-      filename: "popup.html",
-      chunks: ["popup"],
-    }),
+
+    ...getHTMLPlugins(["popup", "options"]),
   ],
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
@@ -39,4 +50,20 @@ module.exports = {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
   },
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
+  },
 };
+
+function getHTMLPlugins(chunks) {
+  return chunks.map(
+    (chunk) =>
+      new HtmlWebpackPlugin({
+        title: "React Extension",
+        filename: `${chunk}.html`,
+        chunks: [chunk],
+      })
+  );
+}

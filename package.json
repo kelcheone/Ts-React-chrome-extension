@@ -9,10 +9,15 @@
     "start": "webpack --watch --progress --config webpack.config.js"
   },
   "devDependencies": {
+    "@types/chrome": "^0.0.242",
+    "@types/react": "^18.2.17",
+    "@types/react-dom": "^18.2.7",
     "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.8.1",
     "html-webpack-plugin": "^5.5.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "style-loader": "^3.3.3",
     "ts-loader": "^9.4.4",
     "typescript": "^5.1.6",
     "webpack": "^5.88.2",
