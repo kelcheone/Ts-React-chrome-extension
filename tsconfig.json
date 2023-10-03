@@ -1,11 +1,11 @@
 {
-    "compilerOptions": {
-        "jsx": "react",
-        "module": "ES6",
-        "target": "ES6",
-        "moduleResolution": "Node",
-        "esModuleInterop": true
-    },
-    "include": ["src/**/*.ts", "src/**/*.tsx"],
-    "exclude": ["node_modules"]
+  "compilerOptions": {
+    "jsx": "react",
+    "module": "ES6",
+    "target": "ES6",
+    "moduleResolution": "Node",
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules"]
 }

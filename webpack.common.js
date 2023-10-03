@@ -2,6 +2,8 @@ const path = require("path");
 const copyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const tailwindcss = require("tailwindcss");
+const autoprefixer = require("autoprefixer");
 
 module.exports = {
   entry: {
@@ -10,7 +12,7 @@ module.exports = {
     background: path.resolve(__dirname, "src/background/background.ts"),
     contentScript: path.resolve(
       __dirname,
-      "src/contentScript/contentScript.ts"
+      "src/contentScript/contentScript.tsx"
     ),
   },
   module: {
@@ -21,7 +23,19 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        use: ["style-loader", "css-loader"],
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                ident: "postcss",
+                plugins: [tailwindcss, autoprefixer],
+              },
+            },
+          },
+        ],
         test: /\.css$/i,
       },
       {
@@ -54,7 +68,9 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
-      chunks: "all",
+      chunks(chunk) {
+        return chunk.name !== "contentScript";
+      },
     },
   },
 };
@@ -63,7 +79,7 @@ function getHTMLPlugins(chunks) {
   return chunks.map(
     (chunk) =>
       new HtmlWebpackPlugin({
-        title: "React Extension",
+        title: "Read It Extension",
         filename: `${chunk}.html`,
         chunks: [chunk],
       })

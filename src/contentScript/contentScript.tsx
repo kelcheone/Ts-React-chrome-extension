@@ -1,16 +1,14 @@
+chrome.runtime.sendMessage("From the content script", (response) => {
+  console.log(response);
+});
+
 import React from "react";
 import ReactDom from "react-dom/client";
-import "../static/tailwind.css";
-// import "./popup.css";
 
-// const test = <p>Hello world</p>;
 const App: React.FC = () => {
-  return (
-    <div className="bg-gray-900 text-white">
-      <p className="font-semibold text-xl">Hello world</p>
-    </div>
-  );
+  return <div></div>;
 };
+
 // create root and append to body
 const root = document.createElement("div");
 document.body.appendChild(root);
